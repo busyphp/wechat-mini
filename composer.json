@@ -10,8 +10,10 @@
 	],
 	"license"     : "CC-BY-NC-4.0",
 	"require"     : {
-		"php"             : ">=7.1.0",
-		"busyphp/busyphp" : "^6.0"
+		"php"                 : ">=7.1.0",
+		"busyphp/busyphp"     : "^6.0",
+		"busyphp/wechat-base" : "^2.0",
+		"ext-json"            : "*"
 	},
 	"require-dev" : {
 		"symfony/var-dumper" : "^4.2"
@@ -23,5 +25,15 @@
 	},
 	"config"      : {
 		"preferred-install" : "dist"
+	},
+	"extra"       : {
+		"busyphp" : {
+			"manager"  : {
+				"name" : "微信小程序模块"
+			},
+			"services" : [
+				"BusyPHP\\wechat\\mini\\Service"
+			]
+		}
 	}
 }
