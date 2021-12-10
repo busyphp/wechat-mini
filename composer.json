@@ -1,0 +1,27 @@
+{
+	"name"        : "busyphp/wechat-mini",
+	"type"        : "library",
+	"description" : "用于BusyPHP微信小程序开发，支持小程序服务端API，及事件处理",
+	"authors"     : [
+		{
+			"name"  : "busy^life",
+			"email" : "busy.life@qq.com"
+		}
+	],
+	"license"     : "CC-BY-NC-4.0",
+	"require"     : {
+		"php"             : ">=7.1.0",
+		"busyphp/busyphp" : "^6.0"
+	},
+	"require-dev" : {
+		"symfony/var-dumper" : "^4.2"
+	},
+	"autoload"    : {
+		"psr-4" : {
+			"BusyPHP\\wechat\\mini\\" : "src"
+		}
+	},
+	"config"      : {
+		"preferred-install" : "dist"
+	}
+}
