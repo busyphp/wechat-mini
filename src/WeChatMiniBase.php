@@ -4,6 +4,7 @@ namespace BusyPHP\wechat\mini;
 
 use BusyPHP\helper\LogHelper;
 use BusyPHP\wechat\WeChatConfig;
+use RuntimeException;
 use think\App;
 
 /**
@@ -17,13 +18,13 @@ class WeChatMiniBase
     use WeChatConfig;
     
     /**
-     * 公众号appId
+     * 小程序appId
      * @var string
      */
     protected $appId;
     
     /**
-     * 公众号密钥
+     * 小程序秘钥
      * @var string
      */
     protected $appSecret;
@@ -49,29 +50,44 @@ class WeChatMiniBase
      * 小程序名称
      * @var string
      */
-    protected $name;
+    protected $programName;
+    
+    /**
+     * 小程序ID，用于区分多个个小程序
+     * @var string
+     */
+    protected $programId;
     
     
     /**
      * Base constructor.
-     * @param string $type 小程序标识
+     * @param string $programId 小程序ID，用于区分多个个小程序
      */
-    public function __construct(string $type = '')
+    public function __construct(string $programId = '')
     {
         $this->app = App::getInstance();
         
-        if (!$type) {
-            $this->name           = $this->getConfig('mini.name', '');
+        if (!$programId) {
+            $this->programId      = '';
+            $this->programName    = $this->getConfig('mini.name', '');
             $this->appId          = $this->getConfig('mini.app_id', '');
             $this->appSecret      = $this->getConfig('mini.app_secret', '');
             $this->token          = $this->getConfig('mini.token', '');
             $this->encodingAESKey = $this->getConfig('mini.encodingAESKey', '');
         } else {
-            $this->name           = $this->getConfig("mini.multi.{$type}.name", '');
-            $this->appId          = $this->getConfig("mini.multi.{$type}.app_id", '');
-            $this->appSecret      = $this->getConfig("mini.multi.{$type}.app_secret", '');
-            $this->token          = $this->getConfig("mini.multi.{$type}.token", '');
-            $this->encodingAESKey = $this->getConfig("mini.multi.{$type}.encodingAESKey", '');
+            $this->programId      = $programId;
+            $this->programName    = $this->getConfig("mini.multi.{$programId}.name", '');
+            $this->appId          = $this->getConfig("mini.multi.{$programId}.app_id", '');
+            $this->appSecret      = $this->getConfig("mini.multi.{$programId}.app_secret", '');
+            $this->token          = $this->getConfig("mini.multi.{$programId}.token", '');
+            $this->encodingAESKey = $this->getConfig("mini.multi.{$programId}.encodingAESKey", '');
+        }
+        
+        if (!$this->appId) {
+            throw new RuntimeException('请到config/extend/wechat.php下配置mini.app_id');
+        }
+        if (!$this->appSecret) {
+            throw new RuntimeException('请到config/extend/wechat.php下配置mini.app_secret');
         }
     }
     
@@ -130,8 +146,18 @@ class WeChatMiniBase
      * 小程序名称
      * @return string
      */
-    public function getName() : string
+    public function getProgramName() : string
     {
-        return $this->name;
+        return $this->programName;
+    }
+    
+    
+    /**
+     * 获取小程序标识
+     * @return string
+     */
+    public function getProgramId() : string
+    {
+        return $this->programId;
     }
 }

@@ -12,7 +12,12 @@ class Service extends \think\Service
     {
         $this->registerRoutes(function(Route $route) {
             // 注册事件通知路由
-            $route->rule("service/plugins/wechat_mini/index", ServiceController::class . "@index")->append([
+            $route->rule("plugins_service/wechat_mini/index", ServiceController::class . "@index")->append([
+                BaseService::ROUTE_VAR_TYPE    => 'plugin',
+                BaseService::ROUTE_VAR_CONTROL => 'service',
+                BaseService::ROUTE_VAR_ACTION  => 'index',
+            ]);
+            $route->rule("plugins_service/wechat_mini/program/<busy_wechat_mini_program_id>", ServiceController::class . "@index")->append([
                 BaseService::ROUTE_VAR_TYPE    => 'plugin',
                 BaseService::ROUTE_VAR_CONTROL => 'service',
                 BaseService::ROUTE_VAR_ACTION  => 'index',

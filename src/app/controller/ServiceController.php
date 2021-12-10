@@ -20,6 +20,21 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        return (new WeChatMiniService())->service();
+        return (new WeChatMiniService($this->param('busy_wechat_mini_program_id/s')))->service();
+    }
+    
+    
+    /**
+     * 生成服务地址入口URL
+     * @param string $programId
+     * @return string
+     */
+    public static function url(string $programId = '') : string
+    {
+        if (!$programId) {
+            return url('/plugins_service/wechat_mini/index')->domain(true)->build();
+        } else {
+            return url("/plugins_service/wechat_mini/program/{$programId}")->domain(true)->build();
+        }
     }
 }

@@ -21,11 +21,15 @@ class WeChatMiniService extends WeChatMiniBase
 {
     /**
      * WeChatMiniService constructor.
-     * @param string $type 小程序标识
+     * @param string $programId 小程序标识
      */
-    public function __construct(string $type = '')
+    public function __construct(string $programId = '')
     {
-        parent::__construct($type);
+        parent::__construct($programId);
+    
+        if (!$this->token) {
+            throw new RuntimeException('请到config/extend/wechat.php下配置mini.token');
+        }
         
         // 监听事件
         $listens = $this->getConfig('mini.listen', []);
@@ -73,7 +77,7 @@ class WeChatMiniService extends WeChatMiniBase
      */
     public function service() : Response
     {
-        self::log()->tag($this->name)->info("服务通知");
+        self::log()->tag($this->programName)->info("服务通知");
         
         try {
             // 校验签名
@@ -87,7 +91,7 @@ class WeChatMiniService extends WeChatMiniBase
             // 执行服务调度
             return $this->dispatch();
         } catch (Throwable $e) {
-            self::log()->tag($this->name)->error($e);
+            self::log()->tag($this->programName)->error($e);
             
             return self::replyMessage();
         }
@@ -102,7 +106,7 @@ class WeChatMiniService extends WeChatMiniBase
     {
         $data = $this->app->request->getInput();
         $data = json_decode($data, true) ?: [];
-        self::log()->tag($this->name)->info($data);
+        self::log()->tag($this->programName)->info($data);
         
         
         $event = null;
@@ -138,7 +142,7 @@ class WeChatMiniService extends WeChatMiniBase
         }
         
         $eventName = get_class($event);
-        self::log()->tag($this->name)->info("处理事件: {$eventName}");
+        self::log()->tag($this->programName)->info("处理事件: {$eventName}");
         $result = Event::trigger($eventName, $event, true);
         if ($result instanceof Response) {
             return $result;
