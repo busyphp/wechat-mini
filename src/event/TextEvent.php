@@ -2,6 +2,8 @@
 
 namespace BusyPHP\wechat\mini\event;
 
+use BusyPHP\wechat\mini\WeChatMiniBaseEvent;
+
 /**
  * 用户在客服会话中发送文本消息事件
  * @author busy^life <busy.life@qq.com>
@@ -11,6 +13,6 @@ namespace BusyPHP\wechat\mini\event;
  * @property int    $CreateTime 消息创建时间(整型）
  * @property string $MsgId 消息id，64位整型
  */
-class TextEvent extends BaseEvent
+class TextEvent extends WeChatMiniBaseEvent
 {
 }

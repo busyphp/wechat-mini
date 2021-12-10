@@ -84,4 +84,54 @@ class WeChatMiniBase
     {
         return LogHelper::use('wechat_mini');
     }
+    
+    
+    /**
+     * 小程序appId
+     * @return string
+     */
+    public function getAppId() : string
+    {
+        return $this->appId;
+    }
+    
+    
+    /**
+     * 小程序密钥
+     * @return string
+     */
+    public function getAppSecret() : string
+    {
+        return $this->appSecret;
+    }
+    
+    
+    /**
+     * 服务器token 长度为3-32字符
+     * @return string
+     */
+    public function getToken() : string
+    {
+        return $this->token;
+    }
+    
+    
+    /**
+     * 服务器加密密钥 长度为3-32字符
+     * @return string
+     */
+    public function getEncodingAESKey() : string
+    {
+        return $this->encodingAESKey;
+    }
+    
+    
+    /**
+     * 小程序名称
+     * @return string
+     */
+    public function getName() : string
+    {
+        return $this->name;
+    }
 }

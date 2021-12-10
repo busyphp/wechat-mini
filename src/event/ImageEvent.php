@@ -2,6 +2,8 @@
 
 namespace BusyPHP\wechat\mini\event;
 
+use BusyPHP\wechat\mini\WeChatMiniBaseEvent;
+
 /**
  * 用户在客服会话中发送图片消息事件
  * @author busy^life <busy.life@qq.com>
@@ -12,6 +14,6 @@ namespace BusyPHP\wechat\mini\event;
  * @property string $MediaId 图片消息媒体id，可以调用[获取临时素材]((getTempMedia)接口拉取数据。
  * @property string $MsgId 消息id，64位整型
  */
-class ImageEvent extends BaseEvent
+class ImageEvent extends WeChatMiniBaseEvent
 {
 }

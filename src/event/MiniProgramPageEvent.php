@@ -2,6 +2,8 @@
 
 namespace BusyPHP\wechat\mini\event;
 
+use BusyPHP\wechat\mini\WeChatMiniBaseEvent;
+
 /**
  * 用户在客服会话中发送小程序卡片消息事件
  * @author busy^life <busy.life@qq.com>
@@ -15,6 +17,6 @@ namespace BusyPHP\wechat\mini\event;
  * @property string $ThumbMediaId 封面图片的临时素材id
  * @property int    $CreateTime 消息创建时间(整型）
  */
-class MiniProgramPageEvent extends BaseEvent
+class MiniProgramPageEvent extends WeChatMiniBaseEvent
 {
 }

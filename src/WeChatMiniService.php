@@ -112,24 +112,24 @@ class WeChatMiniService extends WeChatMiniBase
                 switch ($event) {
                     // 用户在小程序“客服会话按钮”进入客服会话
                     case 'user_enter_tempsession':
-                        $event = new UserEnterTempSessionEvent($data);
+                        $event = new UserEnterTempSessionEvent($this, $data);
                     break;
                 }
             break;
             
             // 用户在客服会话中发送小程序卡片消息
             case 'miniprogrampage':
-                $event = new MiniProgramPageEvent($data);
+                $event = new MiniProgramPageEvent($this, $data);
             break;
             
             // 用户在客服会话中发送图片消息
             case 'image':
-                $event = new ImageEvent($data);
+                $event = new ImageEvent($this, $data);
             break;
             
             // 用户在客服会话中发送文本消息
             case 'text':
-                $event = new TextEvent($data);
+                $event = new TextEvent($this, $data);
             break;
         }
         
