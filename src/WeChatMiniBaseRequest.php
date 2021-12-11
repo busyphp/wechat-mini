@@ -159,7 +159,7 @@ class WeChatMiniBaseRequest extends WeChatMiniBase
         }
         
         if (isset($result['errcode']) && $result['errcode'] != 0) {
-            throw new RuntimeException($result['errmsg'] ?? '', intval($result['errcode'] ?? 0));
+            throw new WeChatMiniException($result['errmsg'] ?? '', intval($result['errcode'] ?? 0));
         }
         
         return $result;
