@@ -57,6 +57,18 @@ class WeChatMiniBaseRequest extends WeChatMiniBase
      */
     protected $https = true;
     
+    /**
+     * 是否自行处理返回值
+     * @var bool
+     */
+    protected $useResult = false;
+    
+    /**
+     * 请求对象
+     * @var HttpHelper
+     */
+    protected $http = null;
+    
     
     /**
      * 执行请求
@@ -93,7 +105,9 @@ class WeChatMiniBaseRequest extends WeChatMiniBase
             throw new RuntimeException("HTTP请求失败: {$e->getMessage()} [{$e->getCode()}]");
         }
         
-        return self::parseResult($result);
+        $this->http = $http;
+        
+        return $this->useResult ? $result : self::parseResult($result);
     }
     
     
