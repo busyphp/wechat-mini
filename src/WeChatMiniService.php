@@ -32,7 +32,7 @@ class WeChatMiniService extends WeChatMiniBase
         }
         
         // 监听事件
-        $listens = $this->getConfig('mini.listen', []);
+        $listens = $this->getWeChatConfig('mini.listen', []);
         foreach ($listens as $event => $listen) {
             if (!$listen) {
                 continue;

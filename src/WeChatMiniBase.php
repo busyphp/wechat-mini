@@ -69,18 +69,18 @@ class WeChatMiniBase
         
         if (!$programId) {
             $this->programId      = '';
-            $this->programName    = $this->getConfig('mini.name', '');
-            $this->appId          = $this->getConfig('mini.app_id', '');
-            $this->appSecret      = $this->getConfig('mini.app_secret', '');
-            $this->token          = $this->getConfig('mini.token', '');
-            $this->encodingAESKey = $this->getConfig('mini.encodingAESKey', '');
+            $this->programName    = $this->getWeChatConfig('mini.name', '');
+            $this->appId          = $this->getWeChatConfig('mini.app_id', '');
+            $this->appSecret      = $this->getWeChatConfig('mini.app_secret', '');
+            $this->token          = $this->getWeChatConfig('mini.token', '');
+            $this->encodingAESKey = $this->getWeChatConfig('mini.encodingAESKey', '');
         } else {
             $this->programId      = $programId;
-            $this->programName    = $this->getConfig("mini.multi.{$programId}.name", '');
-            $this->appId          = $this->getConfig("mini.multi.{$programId}.app_id", '');
-            $this->appSecret      = $this->getConfig("mini.multi.{$programId}.app_secret", '');
-            $this->token          = $this->getConfig("mini.multi.{$programId}.token", '');
-            $this->encodingAESKey = $this->getConfig("mini.multi.{$programId}.encodingAESKey", '');
+            $this->programName    = $this->getWeChatConfig("mini.multi.{$programId}.name", '');
+            $this->appId          = $this->getWeChatConfig("mini.multi.{$programId}.app_id", '');
+            $this->appSecret      = $this->getWeChatConfig("mini.multi.{$programId}.app_secret", '');
+            $this->token          = $this->getWeChatConfig("mini.multi.{$programId}.token", '');
+            $this->encodingAESKey = $this->getWeChatConfig("mini.multi.{$programId}.encodingAESKey", '');
         }
         
         if (!$this->appId) {
