@@ -3,7 +3,7 @@
 namespace BusyPHP\wechat\mini;
 
 use BusyPHP\helper\LogHelper;
-use BusyPHP\wechat\WeChatConfig;
+use BusyPHP\wechat\WithWeChatConfig;
 use RuntimeException;
 use think\App;
 
@@ -15,7 +15,7 @@ use think\App;
  */
 class WeChatMiniBase
 {
-    use WeChatConfig;
+    use WithWeChatConfig;
     
     /**
      * 小程序appId
